@@ -115,6 +115,7 @@ public class Login extends AppCompatActivity {
                         try {
                             JSONObject product1 = new JSONObject(response);
                             String success = product1.getString("success");
+                            String msg = product1.getString("msg");
 
 
 
@@ -127,8 +128,9 @@ public class Login extends AppCompatActivity {
                                 finish();
                                 Toast.makeText(Login.this,"Success",Toast.LENGTH_LONG).show();
                             }else{
+                                progressBar.setVisibility(View.GONE);
                                 View parentLayout = findViewById(android.R.id.content);
-                                Snackbar.make(parentLayout,  "Invalid Login Details", Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(parentLayout,  msg, Snackbar.LENGTH_SHORT).show();
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
