@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
                         try {
                             JSONObject product1 = new JSONObject(response);
                             String success = product1.getString("success");
-                            String msg = product1.getString("msg");
+
 
 
 
@@ -130,7 +130,7 @@ public class Login extends AppCompatActivity {
                             }else{
                                 progressBar.setVisibility(View.GONE);
                                 View parentLayout = findViewById(android.R.id.content);
-                                Snackbar.make(parentLayout,  msg, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(parentLayout,  "Invalid Login Details", Snackbar.LENGTH_SHORT).show();
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
@@ -141,8 +141,10 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressBar.setVisibility(View.GONE);
                         stringRequestFirst.setRetryPolicy(new DefaultRetryPolicy(5000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout,  "Network Error", Snackbar.LENGTH_SHORT).show();
                     }
                 }){
 
