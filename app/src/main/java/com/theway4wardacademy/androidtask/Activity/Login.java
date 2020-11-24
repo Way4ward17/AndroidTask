@@ -112,11 +112,10 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("Response - > ", response);
-
                         try {
                             JSONObject product1 = new JSONObject(response);
                             String success = product1.getString("success");
+
 
 
                             if(success.equals("true")) {
@@ -127,6 +126,9 @@ public class Login extends AppCompatActivity {
                                 startActivity(intent);
                                 finish();
                                 Toast.makeText(Login.this,"Success",Toast.LENGTH_LONG).show();
+                            }else{
+                                View parentLayout = findViewById(android.R.id.content);
+                                Snackbar.make(parentLayout,  "Invalid Login Details", Snackbar.LENGTH_SHORT).show();
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
@@ -138,7 +140,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         stringRequestFirst.setRetryPolicy(new DefaultRetryPolicy(5000,3,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-                        Log.d("Error Response", "onErrorResponse: Volley Error = " + error);
+
                     }
                 }){
 
