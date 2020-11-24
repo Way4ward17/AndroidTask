@@ -100,7 +100,7 @@ public class Login extends AppCompatActivity {
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Field cant be empty .. ", Snackbar.LENGTH_SHORT).show();
         } else {
-            progressBar.setVisibility(View.GONE);
+
             getLogin(emailText, passwordText);
         }
     }
@@ -120,6 +120,7 @@ public class Login extends AppCompatActivity {
 
 
                             if(success.equals("true")) {
+                                progressBar.setVisibility(View.GONE);
                                 String token = product1.getString("token");
                                 sharedPrefManager.saveToken(token);
                                 Intent intent = new Intent(Login.this, MainActivity.class);
