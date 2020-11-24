@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
@@ -133,5 +134,12 @@ public class MainActivity extends AppCompatActivity {
                 requestQueue.add(stringRequestFirst);
 
 
+    }
+
+    public void logout(View view) {
+        sharedPrefManager.saveToken(null);
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        startActivity(intent);
+        finish();
     }
 }
